@@ -1,0 +1,198 @@
+﻿<UserControl
+    x:Class="Labb3_NET22.Views.CreateQuizView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Labb3_NET22.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Labb3_NET22.ViewModels"
+    d:DataContext="{d:DesignInstance viewModels:CreateQuizViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid Name="MyQuiz" Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            FontSize="32"
+            FontStyle="Italic"
+            FontWeight="SemiBold"
+            Text="Create New Quiz" />
+        <Grid Column="0" Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Margin="20,4,40,0"
+                FontSize="16"
+                Text="Enter Title:" />
+            <TextBox
+                Grid.Row="1"
+                Margin="20,4,40,0"
+                FontSize="16"
+                Text="{Binding NewTitle, UpdateSourceTrigger=PropertyChanged}" />
+            <Grid Grid.Row="2">
+                <Button
+                    Margin="130,4,40,0"
+                    Background="CadetBlue"
+                    Command="{Binding SaveCreateQuizCommand}"
+                    FontSize="14"
+                    FontWeight="SemiBold">
+                    Create Quiz
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid Column="0" Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Margin="20,4,40,0"
+                    FontSize="16"
+                    Text="Search:" />
+                <TextBox
+                    Grid.Row="1"
+                    Margin="20,4,40,0"
+                    FontSize="16"
+                    Text="{Binding SearchWord, UpdateSourceTrigger=PropertyChanged}" />
+                <Grid Grid.Row="3">
+                    <Button
+                        Margin="130,10,40,0"
+                        Background="CadetBlue"
+                        Command="{Binding SearchCommand}"
+                        FontSize="14"
+                        FontWeight="SemiBold">
+                        Search Button
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <ListView
+                Grid.Row="0"
+                Margin="2"
+                ItemsSource="{Binding QuizList, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedQuiz, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Header="Quizzes" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <ListView
+                Grid.Row="0"
+                Margin="2"
+                ItemsSource="{Binding QuestionList, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedQuestion, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Statement, UpdateSourceTrigger=PropertyChanged}" Header="Questions" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="1">
+            <ListView
+                Grid.Row="0"
+                Margin="2"
+                ItemsSource="{Binding CategoryList, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Header="Categories" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <ListView
+                Grid.Row="0"
+                Margin="2"
+                ItemsSource="{Binding SelectedQuiz.Questions, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Statement, UpdateSourceTrigger=PropertyChanged}" Header="Questions in Quiz" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid Column="0" Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="3">
+                    <Button
+                        Margin="20,0,20,5"
+                        Background="CadetBlue"
+                        Command="{Binding ResetCommand}"
+                        FontSize="14"
+                        FontWeight="SemiBold">
+                        Reset QuestionList
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Column="2" Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Button
+                    Margin="20,0,20,10"
+                    Background="CadetBlue"
+                    Command="{Binding RemoveQuestionInQuizCommand}"
+                    FontSize="14"
+                    FontWeight="SemiBold">
+                    Remove Question from Quiz
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="0">
+                <Button
+                    Margin="20,5,20,10"
+                    Background="CadetBlue"
+                    Command="{Binding AddQuestionToQuizCommand}"
+                    FontSize="14"
+                    FontWeight="SemiBold">
+                    Add Question to Quiz
+                </Button>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button
+                    Margin="20,0,20,10"
+                    Background="CadetBlue"
+                    Command="{Binding StartViewCommand}"
+                    FontSize="14"
+                    FontWeight="SemiBold">
+                    Start View
+                </Button>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,267 @@
+﻿<UserControl
+    x:Class="Labb3_NET22.Views.EditQuizView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Labb3_NET22.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Labb3_NET22.ViewModels"
+    d:DataContext="{d:DesignInstance viewModels:EditQuizViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid Name="MyQuiz" Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            FontSize="32"
+            FontStyle="Italic"
+            FontWeight="SemiBold"
+            Text="Edit Question" />
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <ListView
+                Grid.Row="0"
+                Margin="2"
+                ItemsSource="{Binding CategoryInQuestion, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Header="Category in Selected Question" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="0">
+            <ListView
+                Grid.Row="0"
+                Margin="2"
+                ItemsSource="{Binding CategoryList, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Header="Add or Remove Category in Question" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <ListView
+                Grid.Row="0"
+                Margin="2"
+                ItemsSource="{Binding QuestionList, UpdateSourceTrigger=PropertyChanged}"
+                SelectedIndex="{Binding SelectedQuestionIndex, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedQuestion, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Statement, UpdateSourceTrigger=PropertyChanged}" Header="Questions" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid
+            Grid.Column="1"
+            ColumnSpan="1"
+            Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="18" Text="Enter Question:" />
+            <TextBox
+                Grid.Row="1"
+                Margin="2,4,40,0"
+                FontSize="16"
+                Text="{Binding Statement, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+
+        <Grid
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            Height="124"
+            Margin="0,0,0,123"
+            VerticalAlignment="Bottom"
+            Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Margin="0,0,0,0"
+                FontSize="18"
+                Text="Answer One:" />
+            <TextBox
+                Grid.Row="1"
+                Margin="2,4,40,0"
+                FontSize="16"
+                Text="{Binding AnswerOne, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock
+                Grid.Row="2"
+                Margin="0,10,0,0"
+                FontSize="18"
+                Text="Answer Two:" />
+            <TextBox
+                Grid.Row="3"
+                Margin="2,4,40,0"
+                FontSize="16"
+                Text="{Binding AnswerTwo}" />
+        </Grid>
+        <Grid Column="2" Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Margin="0,10,0,0"
+                FontSize="18"
+                Text="Answer Three" />
+
+            <TextBox
+                Grid.Row="1"
+                Margin="2,4,40,0"
+                FontSize="16"
+                Text="{Binding AnswerThree}" />
+        </Grid>
+
+        <Grid Column="3" Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                FontSize="18"
+                Text="Correct Answer:" />
+            <TextBlock
+                Grid.Row="1"
+                Margin="10,2,10,2"
+                HorizontalAlignment="Left"
+                FontSize="16">
+                Answer One
+            </TextBlock>
+
+            <CheckBox
+                Grid.Row="1"
+                Grid.Column="1"
+                IsChecked="{Binding CorrectAnswerOne}" />
+            <TextBlock
+                Grid.Row="2"
+                Margin="10,2,10,2"
+                HorizontalAlignment="Left"
+                FontSize="16">
+                Answer Two
+            </TextBlock>
+            <CheckBox
+                Grid.Row="2"
+                Grid.Column="1"
+                IsChecked="{Binding CorrectAnswerTwo}" />
+            <TextBlock
+                Grid.Row="3"
+                Margin="10,2,10,2"
+                HorizontalAlignment="Left"
+                FontSize="16">
+                Answer Three
+            </TextBlock>
+            <CheckBox
+                Grid.Row="3"
+                Grid.Column="1"
+                IsChecked="{Binding CorrectAnswerThree}" />
+        </Grid>
+        <Grid Column="1" Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button
+                Grid.Row="2"
+                Margin="20,0,20,10"
+                Background="CadetBlue"
+                Command="{Binding RemoveQuestionCommand}"
+                FontSize="14"
+                FontWeight="SemiBold">
+                Remove Question
+            </Button>
+            <Button
+                Grid.Row="1"
+                Margin="20,0,20,10"
+                Background="CadetBlue"
+                Command="{Binding EditQuestionCommand}"
+                FontSize="14"
+                FontWeight="SemiBold">
+                Edit Question
+            </Button>
+            <Button
+                Grid.Row="0"
+                Margin="20,0,20,10"
+                Background="CadetBlue"
+                Command="{Binding AddQuestionCommand}"
+                FontSize="14"
+                FontWeight="SemiBold">
+                Add Question
+            </Button>
+        </Grid>
+
+        <Grid Column="2" Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Button
+                    Margin="20,0,20,10"
+                    Background="CadetBlue"
+                    Command="{Binding SaveCategoryInQuestion}"
+                    FontSize="14"
+                    FontWeight="SemiBold">
+                    Add Category in Question
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Button
+                    Margin="20,0,20,10"
+                    Background="CadetBlue"
+                    Command="{Binding RemoveCategoryQuestion}"
+                    FontSize="14"
+                    FontWeight="SemiBold">
+                    Remove Category in Question
+                </Button>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button
+                    Margin="20,0,20,10"
+                    Background="CadetBlue"
+                    Command="{Binding StartViewCommand}"
+                    FontSize="14"
+                    FontWeight="SemiBold">
+                    Start View
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
